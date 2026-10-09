@@ -15,8 +15,8 @@ horaire["datum"] = pd.to_datetime(horaire["datum"], format="%m/%d/%Y %H:%M")
 
 # 2. Ventes par mois (en additionnant les jours) et on retire octobre 2019, incomplet
 mois = jour.resample("ME").sum()
-mois = mois[mois.index < "2019-10-01"]
-
+jours_par_mois = jour.resample("ME").size()
+mois = mois[jours_par_mois == jours_par_mois.index.days_in_month]
 # 3. Tableau de synthèse par groupe
 synthese = pd.DataFrame({
     "Total ventes": mois.sum(),
@@ -29,7 +29,7 @@ synthese = pd.DataFrame({
 # Coefficient de variation : écart-type / moyenne. Plus il est haut, plus les ventes sont irrégulières
 synthese["Irrégularité (%)"] = synthese["Écart-type mensuel"] / synthese["Moyenne par mois"] * 100
 synthese = synthese.round(1).sort_values("Total ventes", ascending=False)
-print("=== Synthèse par groupe (janv. 2014 - sept. 2019) ===")
+print("=== Synthèse par groupe (févr. 2014 - sept. 2019) ===")
 print(synthese)
 
 # 4. Évolution d'une année sur l'autre (années complètes seulement)
