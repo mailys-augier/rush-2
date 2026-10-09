@@ -9,7 +9,7 @@ outil de sélection Excel et recommandations.
 | Membre | Responsabilités |
 |---|---|
 | Maïlys | Contrôle de cohérence des 4 exports, statistiques descriptives en Python, test de prévision, mémo partie 1 (prévision), deck manager |
-| Sophia | Classeur Excel (synthèse, statistiques, état des données), outil de sélection pour la pharmacienne, deck pharmacienne des achats |
+| Sofia | Classeur Excel (synthèse, statistiques, état des données), outil de sélection pour la pharmacienne, deck pharmacienne des achats |
 | Côme | Données publiques externes, mémo partie 2 (partage des données / RGPD), deck propriétaire |
 | Toutes et tous | Relecture croisée, README, répétition des oraux |
 
@@ -21,6 +21,8 @@ outil de sélection Excel et recommandations.
 | `comparaison.py` | Vérifie que les 4 exports concordent entre eux |
 | `statistiques.py` | Calcule les statistiques descriptives → `statistiques.xlsx` |
 | `prevision.py` | Teste les méthodes de prévision et prévoit le mois suivant → `prevision.xlsx` |
+| `donnees_externes.py` | Croise les ventes avec la grippe (Réseau Sentinelles) |
+| `analyse.ipynb` | Notebook Jupyter : toute l'analyse expliquée étape par étape |
 | `excel/` | Classeur final avec l'outil de sélection |
 | `donnees_externes/` | Données publiques utilisées dans l'analyse |
 | `memo/` | Mémo PDF (prévision + partage des données) |
