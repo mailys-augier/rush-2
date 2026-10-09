@@ -1,0 +1,21 @@
+ÉTAT DES DONNÉES
+
+Fichier de référence : Pharma_Ventes_Daily.csv
+- Du 02/01/2014 au 08/10/2019, 2106 jours, aucun jour manquant, aucun doublon, aucune valeur vide.
+- Concorde à 100 % avec le fichier horaire (2106 jours) et le fichier hebdo (302 semaines).
+
+Fichier mensuel : ÉCARTÉ
+- 31 mois sur 70 ne correspondent pas à la somme des jours.
+- Le mensuel est toujours plus élevé (souvent +10 à +40 sur un groupe).
+- Pire cas : octobre 2014, +784 pour le paracétamol (N02BE).
+- Les ventes mensuelles sont recalculées à partir du journalier.
+
+Périodes incomplètes : ÉCARTÉES
+- Octobre 2019 (8 jours seulement) et la dernière semaine de l'hebdo (13/10/2019).
+
+Colonnes non utilisées
+- "Hour" du fichier journalier : valeurs incohérentes (248, 276...).
+
+Points à signaler au client
+- Quantités décimales (0,33, 0,67...) : unité non documentée.
+- Dossier __MACOSX : métadonnées Mac sans données, ignoré.
