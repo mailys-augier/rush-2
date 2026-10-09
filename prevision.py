@@ -9,8 +9,8 @@ GROUPES = ["M01AB", "M01AE", "N02BA", "N02BE", "N05B", "N05C", "R03", "R06"]
 jour = pd.read_csv("data/Pharma_Ventes_Daily.csv")
 jour["datum"] = pd.to_datetime(jour["datum"], format="%m/%d/%Y")
 mois = jour.set_index("datum")[GROUPES].resample("MS").sum()
-mois = mois[mois.index < "2019-10-01"]
-
+jours_par_mois = jour.set_index("datum").resample("MS").size()
+mois = mois[jours_par_mois == jours_par_mois.index.days_in_month]
 
 # 2. Les 4 méthodes de prévision.
 #    Chaque méthode reçoit UNIQUEMENT l'historique connu avant le mois à prévoir.
