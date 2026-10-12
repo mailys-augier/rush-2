@@ -6,7 +6,7 @@ Analyse de près de 6 ans de ventes (janvier 2014 → octobre 2019) de 8 groupes
 
 | Membre | Responsabilités |
 |---|---|
-| Maïlys | Contrôle de cohérence des 4 exports, statistiques et test de prévision en Python, notebooks `analyse.ipynb` et `classeur.ipynb`, mémo partie 1 (prévision), deck manager, gestion du dépôt GitHub |
+| Maïlys | Contrôle de cohérence des 4 exports, statistiques et test de prévision en Python, notebooks `analyse.ipynb` et `classeur.ipynb`, interface de mise à jour, analyse par catégorie, mémo partie 1 (prévision), deck manager, gestion du dépôt GitHub |
 | Sofia | Classeur Excel (synthèse, statistiques, état des données), outil de sélection pour la pharmacienne, README, deck pharmacienne des achats |
 | Côme | Données publiques (grippe, Réseau Sentinelles) et `donnees_externes.py`, mémo partie 2 (partage des données / RGPD), deck propriétaire |
 | Toutes et tous | Relecture croisée, répétition des oraux |
@@ -22,6 +22,9 @@ Analyse de près de 6 ans de ventes (janvier 2014 → octobre 2019) de 8 groupes
 | `donnees_externes.py` | Croise les ventes avec la grippe (Réseau Sentinelles) |
 | `analyse.ipynb` | Notebook Jupyter : toute l'analyse expliquée étape par étape |
 | `classeur.ipynb` | Met à jour le classeur Excel à partir du dernier export (Run All) |
+| `mettre_a_jour.bat` | Double-clic : ouvre l'interface de mise à jour |
+| `interface.py` | L'interface : importer les CSV, mettre à jour le classeur, voir les résultats (tableau, graphique) et les catégories |
+| `categories.py` | Range les médicaments par catégorie grâce à leur code ATC, et repère les nouveaux médicaments |
 | `excel/` | Classeur final avec l'outil de sélection |
 | `donnees_externes/` | Données publiques utilisées dans l'analyse |
 | `memo/` | Mémo PDF (prévision + partage des données) |
@@ -44,6 +47,7 @@ Le classeur se trouve dans le dossier `excel/`. Il s'ouvre dans Excel 365 et ne 
 | Médicaments | Ce que contient chaque groupe, selon la classification de l'OMS |
 | Méthode | Comment chaque chiffre est obtenu |
 | Statistiques | Les chiffres détaillés : par groupe, mois, jour, heure, année |
+| Catégories | Les médicaments regroupés par catégorie (douleur, anxiété et sommeil, respiratoire, allergies) et les nouveaux médicaments détectés |
 | État des données | L'export retenu, ce qui a été vérifié, corrigé ou écarté |
 | Données | Les ventes jour par jour, lues par l'onglet Ventes |
 
@@ -79,6 +83,10 @@ Le notebook `classeur.ipynb` met à jour le classeur à partir des exports journ
 L'unité des quantités n'est pas précisée dans les exports. Le classeur présente donc des volumes et des écarts, pas un nombre de boîtes.
 
 ## Relancer l'analyse avec un nouvel export
+
+Le plus simple : double-cliquer sur `mettre_a_jour.bat`, cliquer sur « Choisir les fichiers CSV… » pour importer le nouvel export, puis sur « Mettre à jour le classeur ».
+
+Pour le faire à la main :
 
 1. Installer Python 3 (python.org, en cochant « Add python.exe to PATH »).
 2. Remplacer les 4 fichiers du dossier `data/` par le nouvel export (mêmes noms de fichiers).
