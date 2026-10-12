@@ -30,6 +30,7 @@ Analyse de près de 6 ans de ventes (janvier 2014 → octobre 2019) de 8 groupes
 | `donnees_externes/` | Données publiques utilisées dans l'analyse |
 | `memo/` | Mémo PDF (prévision + partage des données) |
 | `decks/` | Les 3 présentations (manager, pharmacienne, propriétaire) |
+**Excel ou interface ?** Le classeur Excel est la référence : il garde le détail, l'historique (une copie par mois pendant 3 ans dans `excel/archives/`) et permet les études « avant / pendant / après ». L'interface (`mettre_a_jour.bat`) est la vue condensée du mois : prévision, alertes, événements, synthèse PDF. Les nouveaux médicaments sont ajoutés automatiquement aux deux à chaque import.
 
 ## Classeur Excel et outil de sélection
 

@@ -5,11 +5,19 @@ Le code ATC se lit de gauche à droite, du plus large au plus précis :
 
 Si un nouvel export contient un nouveau médicament (une nouvelle colonne, par exemple N02BB ou R05),
 il est rangé automatiquement dans la bonne catégorie grâce au début de son code, et signalé comme nouveau.
+
+Le manager peut aussi ajouter ou reclasser des médicaments à la main, depuis l'interface (onglet Catégories).
+Ses choix sont enregistrés dans categories_perso.json et passent avant le classement automatique,
+partout : dans l'interface et dans le classeur Excel.
 """
 
+import json
 import re
+from pathlib import Path
 
 import pandas as pd
+
+FICHIER_PERSO = Path(__file__).resolve().parent / "categories_perso.json"   # les ajouts faits à la main
 
 # Les 8 groupes de l'export d'origine (2014-2019)
 GROUPES_CONNUS = ["M01AB", "M01AE", "N02BA", "N02BE", "N05B", "N05C", "R03", "R06"]
@@ -61,20 +69,57 @@ def codes_atc(colonnes):
     return [c for c in colonnes if MOTIF_ATC.match(str(c))]
 
 
-def categorie(code):
-    """La catégorie d'un code ATC, même inconnu."""
+# ----------------------------------------------------------------- les ajouts faits à la main
+
+def charger_perso():
+    """Les médicaments ajoutés ou reclassés à la main : {code: {"nom": ..., "categorie": ...}}."""
+    try:
+        return json.loads(FICHIER_PERSO.read_text(encoding="utf-8"))
+    except (FileNotFoundError, ValueError):
+        return {}
+
+
+def enregistrer_perso(perso):
+    """Enregistre les ajouts faits à la main dans categories_perso.json."""
+    FICHIER_PERSO.write_text(json.dumps(perso, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
+
+
+def code_valide(code):
+    """Vrai si le texte a la forme d'un code ATC (N02BE, R05, N02BE01…)."""
+    return bool(MOTIF_ATC.match(code))
+
+
+# ----------------------------------------------------------------- le classement
+
+def categorie_auto(code):
+    """La catégorie d'un code ATC selon la classification, sans tenir compte des ajouts à la main."""
     for longueur in range(len(code), 2, -1):
         if code[:longueur] in CATEGORIES:
             return CATEGORIES[code[:longueur]]
     return f"Autres : {FAMILLES.get(code[0], 'famille inconnue')}"
 
 
+def categorie(code):
+    """La catégorie d'un code ATC, même inconnu. Un choix fait à la main passe en premier."""
+    perso = charger_perso().get(code, {})
+    return perso.get("categorie") or categorie_auto(code)
+
+
 def sous_groupe(code):
-    """Le nom ATC le plus précis connu pour ce code."""
+    """Le nom le plus précis connu pour ce code (le nom saisi à la main passe en premier)."""
+    perso = charger_perso().get(code, {})
+    if perso.get("nom"):
+        return perso["nom"]
     for longueur in range(len(code), 2, -1):
         if code[:longueur] in SOUS_GROUPES:
             return SOUS_GROUPES[code[:longueur]]
     return "Sous-groupe à identifier"
+
+
+def toutes_les_categories():
+    """Les catégories connues (classification + ajouts à la main), pour les listes de choix."""
+    noms = set(CATEGORIES.values()) | {p["categorie"] for p in charger_perso().values() if p.get("categorie")}
+    return sorted(noms)
 
 
 def nouveaux_codes(colonnes):

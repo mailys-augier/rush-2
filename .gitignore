@@ -4,3 +4,5 @@ __pycache__/
 .ipynb_checkpoints/
 output/
 donnees_externes/ventes_et_grippe.xlsx
+rapports/
+excel/archives/
