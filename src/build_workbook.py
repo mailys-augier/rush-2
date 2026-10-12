@@ -259,8 +259,8 @@ def methode():
          "Écrit des formules SOMME.SI.ENS qui additionnent l'onglet Données entre la date de début et la date de fin.",
          "Les formules sont visibles dans l'onglet Ventes : cliquer sur une cellule de résultat pour la lire."),
         ("13. Mise à jour mensuelle",
-         "Remplacer les 4 CSV dans le dossier data, lancer python src/build_workbook.py : les deux classeurs sont "
-         "recréés et tous les contrôles refaits.",
+         "Remplacer les 4 CSV dans le dossier data, puis double-cliquer sur mettre_a_jour.bat (ou Run All dans classeur.ipynb) : le classeur est "
+         "recalculé et tous les contrôles refaits.",
          "Coller les nouvelles lignes à la suite dans l'onglet Données, puis étendre les plages des formules de "
          "l'onglet Ventes. Les autres onglets ne se recalculent pas seuls."),
     ]
