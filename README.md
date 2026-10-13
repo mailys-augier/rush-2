@@ -23,13 +23,17 @@ Analyse de près de 6 ans de ventes (janvier 2014 → octobre 2019) de 8 groupes
 | `analyse.ipynb` | Notebook Jupyter : toute l'analyse expliquée étape par étape |
 | `classeur.ipynb` | Met à jour le classeur Excel à partir du dernier export (Run All) |
 | `mettre_a_jour.bat` | Double-clic : ouvre l'interface de mise à jour |
-| `interface.py` | L'interface : importer les CSV, mettre à jour le classeur, voir les résultats (tableau, graphique) et les catégories |
+| `interface.py` | L'interface (6 pages) : mise à jour, ventes, prévision, suivi des prévisions, événements, catégories ; synthèse PDF du mois |
 | `categories.py` | Range les médicaments par catégorie grâce à leur code ATC, et repère les nouveaux médicaments |
 | `src/build_workbook.py` | Calcule les onglets Synthèse, Calendrier, Conseils, Statistiques et État des données |
 | `excel/` | Classeur final avec l'outil de sélection |
 | `donnees_externes/` | Données publiques utilisées dans l'analyse |
 | `memo/` | Mémo PDF (prévision + partage des données) |
 | `decks/` | Les 3 présentations (manager, pharmacienne, propriétaire) |
+| `evenements.json` | Les événements notés dans l'interface (ruptures, fermetures, épidémies…) |
+| `suivi_previsions.csv` | Les prévisions enregistrées chaque mois, pour les comparer au réel |
+| `categories_perso.json` | Les médicaments ajoutés ou reclassés à la main dans l'interface |
+
 **Excel ou interface ?** Le classeur Excel est la référence : il garde le détail, l'historique (une copie par mois pendant 3 ans dans `excel/archives/`) et permet les études « avant / pendant / après ». L'interface (`mettre_a_jour.bat`) est la vue condensée du mois : prévision, alertes, événements, synthèse PDF. Les nouveaux médicaments sont ajoutés automatiquement aux deux à chaque import.
 
 ## Classeur Excel et outil de sélection
@@ -80,7 +84,7 @@ Les exports utilisent les codes de la classification ATC. Le classeur et le deck
 
 ### D'où viennent les chiffres
 
-Tous les chiffres du classeur viennent du code. Le script `src/build_workbook.py` (Sofia) calcule la Synthèse, le Calendrier, les Conseils, les Statistiques et l'État des données. Le notebook `classeur.ipynb` lance ce script, reprend ses résultats dans le classeur, puis met à jour l'onglet Données, les formules de l'onglet Ventes, la Prévision et les Catégories. Un double-clic sur `mettre_a_jour.bat` fait tout cela d'un coup.
+Tous les chiffres du classeur viennent du code. Le script `src/build_workbook.py` (Sofia) calcule la Synthèse, le Calendrier, les Conseils, les Statistiques et l'État des données. Le notebook `classeur.ipynb` lance ce script, reprend ses résultats dans le classeur, puis met à jour l'onglet Données, les formules de l'onglet Ventes, la Prévision et les Catégories, ajoute les nouveaux médicaments (onglet « Nouveaux médicaments ») et archive une copie datée dans `excel/archives/`. Un double-clic sur `mettre_a_jour.bat` fait tout cela d'un coup.
 
 L'unité des quantités n'est pas précisée dans les exports. Le classeur présente donc des volumes et des écarts, pas un nombre de boîtes.
 
