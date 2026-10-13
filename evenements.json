@@ -1,0 +1,12 @@
+[
+  {
+    "debut": "2019-09",
+    "fin": "2019-09",
+    "type": "grippe",
+    "codes": [
+      "N02BE",
+      "R06"
+    ],
+    "texte": "grippe"
+  }
+]
